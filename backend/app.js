@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
 var path = require('path');
 
 var appRoutes = require('./routes/app');
+const { log } = require("console");
 
 const app = express();
 
@@ -29,5 +32,10 @@ app.use('/', appRoutes);
 app.use(function (req, res, next) {
   return res.render('index');
 });
+
+// Conexão com o banco de dados
+mongoose.connect('mongodb://localhost:27017/mean-stack')
+.then(() => {console.log('Connected to database!')})
+.catch((err) => {console.log('Connection failed!', err)});
 
 module.exports = app;
