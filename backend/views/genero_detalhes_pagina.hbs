@@ -50,7 +50,7 @@
         <div>
             <form action="/generos/detalhar" method="post">  
                 <label for="genero">Gênero: </label>
-                <select name="genero">
+                <select name="idGenero">
                     {{#each lista}}
                         <option value="{{this._id}}">{{this.tipo_genero}}</option>
                     {{/each}}

@@ -39,8 +39,8 @@ router.post('/autor/criar', async (req, res, next) => {
 
 router.get('/autores', async (req, res, next) => {
     try{
-      const lista_autoresRecuperado = await Autor.find({}).exec();
-      res.render('autor_lista_pagina', { titulo: 'Lista de Autor', lista: "lista_autoresRecuperado", listaExiste: true }); 
+      const lista_autoresRecuperado = await Autor.find().exec();
+      res.render('autor_lista_pagina', { titulo: 'Lista de Autor', lista: lista_autoresRecuperado, listaExiste: true }); 
     }
     catch(err){
       err.stack;
@@ -141,7 +141,6 @@ router.post('/genero/criar', async (req, res, next) => {
 router.get('/generos', async (req, res, next) => {
     try{
       const lista_generosRecuperado = await Genero.find().exec();
-      console.log(lista_generosRecuperado)
       res.render('genero_lista_pagina', { titulo: 'Lista de Gêneros', lista: lista_generosRecuperado, listaExiste: true });
     }
     catch(err){
@@ -215,7 +214,7 @@ router.get('/livro/criar',  async (req, res, next) => {
       res.render("livro_criar_pagina", {
           titulo: "Criar Livro",
           autores: autoresEncontrados,
-          generos: autoresEncontrados
+          generos: generosEncontrados
       });
   }
   catch (err) {
@@ -238,7 +237,7 @@ router.post('/livro/criar', async (req, res, next) => {
     });
 
     try{
-      const livroSave = await livro;
+      const livroSave = await livro.save();
       res.redirect('/livro/detalhes/' + livroSave._id);   
     }
     catch(err){
@@ -255,7 +254,7 @@ router.get('/livros', async (req, res, next) => {
         .populate("generos")  
         .exec();
   
-        res.render('livro_detalhes_pagina', { titulo: 'Lista de Livros', detalhes: "lista_livrosRecuperado", listaExiste: true });
+        res.render('livro_detalhes_pagina', { titulo: 'Lista de Livros', detalhes: lista_livrosRecuperado, listaExiste: true });
     }
     catch(err){
       err.stack;

@@ -1,4 +1,6 @@
 const express = require("express");
+const hbs = require("hbs")
+hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
