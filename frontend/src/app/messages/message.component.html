@@ -1,15 +1,15 @@
-<input type="text" [(ngModel)]="message.author" class="form-control">
-<textarea [(ngModel)]="message.content" class="form-control"></textarea>
+<input type="text" [(ngModel)]="messageVarClasse().username" class="form-control">
+<textarea [(ngModel)]="messageVarClasse().content" class="form-control"></textarea>
 <article class="panel panel-default">
   <div class="panel-body">
-    {{ message.content }}
+    {{messageVarClasse().content}}
   </div>
   <footer class="panel-footer">
     <div class="author">
-      {{ message.author }}
+      {{messageVarClasse().username}}
     </div>
     <div class="config">
-      <a href="#" class="btn btn-primary">Editar</a>
+      <a href="#" class="btn btn-primary" (click)="onEdit()">Editar</a>
       <a href="#" class="btn btn-danger">Eliminar</a>
     </div>
   </footer>
