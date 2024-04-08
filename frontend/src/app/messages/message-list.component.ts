@@ -1,7 +1,8 @@
 import {FormsModule} from "@angular/forms";
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessageComponent} from './message.component';
 import {Message} from './message.model';
+import {MessageService} from './message.services';
 
 @Component({
   selector: 'app-message-list',
@@ -18,13 +19,19 @@ import {Message} from './message.model';
         <h3>No Messages Available</h3>
       }
     </div>
-  `
+  `,
 })
 
-export class MessageListComponent {
+export class MessageListComponent  implements OnInit{
   messages: Message[] = [
     new Message("Texto 01 da Mensagem - LIST-Comp", "ViníciusRosalen"),
     new Message("Texto 02 da Mensagem - LIST-Comp", "RosalenSilva"),
     new Message("Texto 03 da Mensagem - LIST-Comp", "SilvaVinícius")
   ];
+
+  constructor(private messageService: MessageService) {}
+
+  ngOnInit() {
+    this.messages = this.messageService.getMessages();
+  }
 }
