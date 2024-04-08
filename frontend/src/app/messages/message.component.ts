@@ -1,20 +1,23 @@
-import {Component, EventEmitter, Input, input, Output} from "@angular/core";
-import {FormsModule} from "@angular/forms";
+import {Component, EventEmitter, input, Output} from "@angular/core";
+import {CommonModule} from "@angular/common";
 import {Message} from "./message.model";
+import {RouterOutlet} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: "app-message",
   standalone: true,
-  imports: [FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule],
   templateUrl: "./message.component.html",
   styleUrls: ["./message.component.css"]
 })
 
 export class MessageComponent {
-  messageVarClasse = input<Message>(new Message("",""))
+  messageVarClass = input<Message>(new Message("", ""))
 
   @Output() outputMessage = new EventEmitter<string>();
-  onEdit(){
+
+  onEdit() {
     this.outputMessage.emit('Texto retornado: venho de message (child) para app (parent)');
   }
 }
