@@ -1,4 +1,4 @@
-import {FormsModule} from "@angular/forms";
+import {FormsModule, NgForm} from "@angular/forms";
 import {Component, inject} from '@angular/core';
 import {MessageService} from "./message.services";
 import {Message} from "./message.model";
@@ -8,14 +8,23 @@ import {Message} from "./message.model";
   standalone: true,
   imports: [FormsModule],
   templateUrl: './message-input.component.html',
+  styles: `input.ng-invalid.ng-touched {
+    border: 1px solid red
+  } `
 })
 
 export class MessageInputComponent {
   private messageService = inject(MessageService);
 
-  onSave(text: string) {
-    const messageAux = new Message(text, 'ViníciusRosalen');
+  // onSave(text: string) {
+  //   const messageAux = new Message(text, 'ViníciusRosalen');
+  //   this.messageService.addMessage(messageAux);
+  //   console.log(this.messageService.getMessages());
+  // }
+
+  onSubmit(form: NgForm) {
+    const messageAux = new Message(form.value.content, 'ViníciusRosalen');
     this.messageService.addMessage(messageAux);
-    console.log(this.messageService.getMessages());
+    form.resetForm();
   }
 }
