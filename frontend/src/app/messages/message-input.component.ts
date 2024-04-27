@@ -24,7 +24,14 @@ export class MessageInputComponent {
 
   onSubmit(form: NgForm) {
     const messageAux = new Message(form.value.content, 'ViníciusRosalen');
-    this.messageService.addMessage(messageAux);
+    this.messageService.addMessage(messageAux).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
     form.resetForm();
   }
 }
