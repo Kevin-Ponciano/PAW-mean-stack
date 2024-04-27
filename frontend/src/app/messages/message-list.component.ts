@@ -13,7 +13,7 @@ import {MessageService} from './message.services';
   ],
   template: `
     <div class="col-md-8 col-md-offset-2">
-      @for (msg of messages; track $index){
+      @for (msg of messages; track $index) {
         <app-message [messageVarClass]="msg" (outputMessage)="msg.content = $event"></app-message>
       } @empty {
         <h3>No Messages Available</h3>
@@ -22,16 +22,22 @@ import {MessageService} from './message.services';
   `,
 })
 
-export class MessageListComponent  implements OnInit{
-  messages: Message[] = [
-    new Message("Texto 01 da Mensagem - LIST-Comp", "ViníciusRosalen"),
-    new Message("Texto 02 da Mensagem - LIST-Comp", "RosalenSilva"),
-    new Message("Texto 03 da Mensagem - LIST-Comp", "SilvaVinícius")
-  ];
+export class MessageListComponent implements OnInit {
+  messages: Message[] = [];
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) {
+  }
 
   ngOnInit() {
-    this.messages = this.messageService.getMessages();
+    this.messageService.getMessages()
+      .subscribe({
+          next: (messages: Message[]) => {
+            this.messages = messages;
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        }
+      );
   }
 }

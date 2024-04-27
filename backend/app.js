@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-var path = require('path');
+const path = require('path');
 
-var appRoutes = require('./routes/app');
 const { log } = require("console");
 
 const app = express();
+
+const appRoutes = require('./routes/app');
+const messageRoutes = require('./routes/messages');
+const userRoutes = require('./routes/user');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +29,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/messages', messageRoutes);
+app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

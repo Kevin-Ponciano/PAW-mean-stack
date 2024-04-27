@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmit(refLocalForm)" #refLocalForm="ngForm" ngNativeValidate>
     <div class="form-group">
       <label>Conteúdo</label>
-      <input type="text" id="myContent" class="form-control" ngModel name="myContentngForm" required
+      <input type="text" id="myContent" class="form-control" ngModel name="content" required
              oninvalid="this.setCustomValidity('Campo Vazio')" oninput="setCustomValidity('')">
     </div>
 
