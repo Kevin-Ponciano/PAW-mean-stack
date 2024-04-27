@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AuthServices} from "../auth.services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signin',
@@ -11,8 +13,9 @@ import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators
 export class SigninComponent implements OnInit {
 
   myFormIn!: FormGroup;
+  private authService = inject(AuthServices);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,8 +30,8 @@ export class SigninComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(4),
-          this.minusculoFValidator,
+          // Validators.minLength(4),
+          // this.minusculoFValidator,
         ])]
     });
   }
@@ -44,6 +47,20 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
+    const email = this.myFormIn.value.email;
+    const password = this.myFormIn.value.password;
+    this.authService.login(email, password).subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.router.navigate(['/mensagens']);
+        } else {
+          console.log('error ao logar');
+        }
+      },
+      error: (error: any) => {
+        console.log('error', error);
+      }
+    });
     this.myFormIn.reset()
   }
 

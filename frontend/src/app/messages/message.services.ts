@@ -18,6 +18,7 @@ export class MessageService {
   }
 
   deleteMessage(message: Message) {
+
     this.messageService.splice(this.messageService.indexOf(message), 1);
   }
 

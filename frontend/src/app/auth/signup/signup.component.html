@@ -2,63 +2,40 @@
 <div class="col-md-8 col-md-offset-2">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="firstName">Nome:</label>
-      <input type="text" id="firstName" class="form-control"
-             formControlName="firstNameTS">
+      <label for="name">Nome:</label>
+      <input type="text" id="name" class="form-control"
+             formControlName="name">
     </div>
-    @if (myForm.get('firstNameTS')?.errors?.['required'] &&
-    myForm.get('firstNameTS')?.touched) {
+    @if (myForm.get('name')?.errors?.['required'] &&
+    myForm.get('name')?.touched) {
       <div class="alert alert-danger">
         O campo nome é obrigatório
       </div>
     }
     <div class="form-group">
-      <label for="lastName">Sobrenome:</label>
-      <input type="text" id="lastName" class="form-control"
-             formControlName="lastNameTS">
-    </div>
-    @if (myForm.get('lastNameTS')?.errors?.['required'] &&
-    myForm.get('lastNameTS')?.touched) {
-      <div class="alert alert-danger">
-        O campo sobrenome é obrigatório
-      </div>
-    }
-    @if (myForm.get('lastNameTS')?.errors?.['minlength'] &&
-    myForm.get('lastNameTS')?.touched) {
-      <div class="alert alert-danger">
-        O campo sobrenome deve ter no mínimo 4 caracteres
-      </div>
-    }
-    @if (myForm.get('lastNameTS')?.errors?.['maxlength'] &&
-    myForm.get('lastNameTS')?.touched) {
-      <div class="alert alert-danger">
-        O campo sobrenome deve ter no máximo 16 caracteres
-      </div>
-    }
-    <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" id="email" class="form-control"
-             formControlName="emailTS">
+             formControlName="email">
     </div>
-    @if (myForm.get('emailTS')?.errors?.['required'] &&
-    myForm.get('emailTS')?.touched) {
+    @if (myForm.get('email')?.errors?.['required'] &&
+    myForm.get('email')?.touched) {
       <div class="alert alert-danger">
         O campo email é obrigatório
       </div>
     }
-    @if (myForm.get('emailTS')?.errors?.['pattern'] &&
-    myForm.get('emailTS')?.touched) {
+    @if (myForm.get('email')?.errors?.['pattern'] &&
+    myForm.get('email')?.touched) {
       <div class="alert alert-danger">
         O campo email não é válido
       </div>
     }
     <div class="form-group">
-      <label for="pass">Nome:</label>
-      <input type="password" id="pass" class="form-control"
-             formControlName="passwordTS">
+      <label for="password">Password:</label>
+      <input type="password" id="password" class="form-control"
+             formControlName="password">
     </div>
-    @if (myForm.get('passwordTS')?.errors?.['required'] &&
-    myForm.get('passwordTS')?.touched) {
+    @if (myForm.get('password')?.errors?.['required'] &&
+    myForm.get('password')?.touched) {
       <div class="alert alert-danger">
         O campo senha é obrigatório
       </div>

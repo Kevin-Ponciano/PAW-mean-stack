@@ -5,10 +5,10 @@
       <label for="email">Email</label>
       <input type="email" id="email" class="form-control" formControlName="email">
     </div>
-    @if (myFormIn.get('emailTS')?.errors?.['required'] && myFormIn.get('emailTS')?.touched) {
+    @if (myFormIn.get('email')?.errors?.['required'] && myFormIn.get('emailTS')?.touched) {
       <div class="alert alert-danger">Email is required</div>
     }
-    @if (myFormIn.get('emailTS')?.errors?.['required'] && myFormIn.get('pattern')?.touched) {
+    @if (myFormIn.get('email')?.errors?.['required'] && myFormIn.get('pattern')?.touched) {
       <div class="alert alert-danger">Email is invalid</div>
     }
 
@@ -16,15 +16,15 @@
       <label for="password">Password</label>
       <input type="password" id="password" class="form-control" formControlName="password">
     </div>
-    @if (myFormIn.get('passwordTS')?.errors?.['required'] && myFormIn.get('passwordTS')?.touched) {
+    @if (myFormIn.get('password')?.errors?.['required'] && myFormIn.get('passwordTS')?.touched) {
       <div class="alert alert-danger">Password is required</div>
     }
 
-    @if (myFormIn.get('passwordTS')?.errors?.['minlength'] && myFormIn.get('passwordTS')?.touched) {
+    @if (myFormIn.get('password')?.errors?.['minlength'] && myFormIn.get('passwordTS')?.touched) {
       <div class="alert alert-danger">Password is too short</div>
     }
 
-    @if (myFormIn.get('passwordTS')?.errors?.['minusculoF'] && myFormIn.get('passwordTS')?.touched) {
+    @if (myFormIn.get('password')?.errors?.['minusculoF'] && myFormIn.get('passwordTS')?.touched) {
       <div class="alert alert-danger">Senha aceita apenas letras minusculas</div>
     }
     <button type="submit" class="btn btn-primary" [disabled]="!myFormIn.valid">Sign In</button>
