@@ -4,7 +4,7 @@ import {MessageService} from "../message.services";
 import {Message} from "../message.model";
 import {AuthServices} from "../../auth/auth.services";
 import {ChatComponent} from "../chat/chat.component";
-import $ from "jquery";
+import {User} from "../../auth/user.model";
 
 @Component({
   selector: 'app-message-input',
@@ -19,7 +19,8 @@ export class InputComponent {
   private user = this.authService.user();
 
   onSubmit(form: NgForm) {
-    const messageAux = new Message(form.value.content, this.user.name, this.user._id);
+    const user = new User(this.user.name, this.user.email, undefined, undefined, this.user._id)
+    const messageAux = new Message(form.value.content, user);
 
     this.messageService.addMessage(messageAux).subscribe({
       next: (response) => {

@@ -2,7 +2,7 @@ import {inject, Injectable} from "@angular/core";
 import {Message} from "./message.model";
 import {HttpClient} from "@angular/common/http";
 import {catchError, map, Observable} from "rxjs";
-import $ from "jquery";
+import {User} from "../auth/user.model";
 
 @Injectable()
 export class MessageService {
@@ -18,8 +18,8 @@ export class MessageService {
     return this.http.post(this.baseUrl + 'messages/save', message, {headers: this.headers}).pipe(
       map((response: any) => {
         const message = response.data;
-        this.messageService.push(new Message(
-          message.content, message.user.name, message.user._id, message._id));
+        const user = new User(message.user.name, message.user.email, undefined, undefined, message.user._id);
+        this.messageService.push(new Message(message.content, user, message._id));
 
         return response.message;
       }),
@@ -37,8 +37,8 @@ export class MessageService {
         const messages = response.data;
         let transformedMessages: Message[] = [];
         for (let message of messages) {
-          transformedMessages.push(new Message(
-            message.content, message.user.name, message.user._id, message._id));
+          const user = new User(message.user.name, message.user.email, undefined, undefined, message.user._id);
+          transformedMessages.push(new Message(message.content, user, message._id));
         }
         this.messageService = transformedMessages;
         return transformedMessages;

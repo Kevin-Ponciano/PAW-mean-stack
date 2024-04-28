@@ -4,9 +4,9 @@ const router = express.Router();
 const Message = require('../model/message');
 const auth = require("../middleware/auth");
 
-router.get('/',auth, async (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
     try {
-        const messages = await Message.find().populate('user', 'name _id');
+        const messages = await Message.find({user: {$exists: true}}).populate('user', 'name _id');
         res.status(200).json({
             message: 'Messages fetched successfully!',
             data: messages
@@ -19,15 +19,14 @@ router.get('/',auth, async (req, res, next) => {
     }
 });
 
-router.post('/save',auth, async (req, res, next) => {
-    const message = new Message({
-        content: req.body.content,
-        user: req.body.userId
-    });
+router.post('/save', auth, async (req, res, next) => {
+    const message = new Message(req.body);
 
     try {
         const messageSaved = await message.save();
-        const messageResponse = await Message.findById(messageSaved._id).populate('user', 'name _id');
+        const messageResponse = await Message
+            .findById(messageSaved._id)
+            .populate('user', 'name _id');
         res.status(201).json({
             message: 'Message saved successfully!',
             data: messageResponse

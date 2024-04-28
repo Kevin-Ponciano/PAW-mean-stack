@@ -41,7 +41,6 @@ export class ChatComponent implements OnInit {
     }, 1000);
 
     $('#chat').on('DOMNodeInserted', function () {
-      console.log('scroll')
       $(this).animate({scrollTop: 100000000});
     })
   }

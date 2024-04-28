@@ -32,17 +32,19 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/logout', auth, async (req, res) => {
-    try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token;
-        });
-        await req.user.save();
-        res.send();
-    } catch (error) {
-        res.status(500).send();
-    }
-});
+// router.get('/logout', auth, async (req, res) => {
+//     try {
+//         req.user.tokens = req.user.tokens.filter((token) => {
+//             return token.token !== req.token;
+//         });
+//         console.log(req.user.tokens)
+//         await req.user.save();
+//         res.send();
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).send();
+//     }
+// });
 
 router.get('/test', auth, async (req, res) => {
     try {

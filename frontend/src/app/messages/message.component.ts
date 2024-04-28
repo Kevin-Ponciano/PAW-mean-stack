@@ -14,18 +14,18 @@ import {MessageService} from "./message.services";
 })
 
 export class MessageComponent {
-  messageVarClass = input<Message>(new Message("", ""))
+  //messageVarClass = input<Message>(new Message("", ""))
 
-  @Output() outputMessage = new EventEmitter<string>();
+  //@Output() outputMessage = new EventEmitter<string>();
 
   constructor(private  messageService: MessageService) {
   }
 
-  onEdit() {
-    this.outputMessage.emit('Texto retornado: venho de message (child) para app (parent)');
-  }
-
-  onDelete() {
-    this.messageService.deleteMessage(this.messageVarClass());
-  }
+  // onEdit() {
+  //   this.outputMessage.emit('Texto retornado: venho de message (child) para app (parent)');
+  // }
+  //
+  // onDelete() {
+  //   this.messageService.deleteMessage(this.messageVarClass());
+  // }
 }
