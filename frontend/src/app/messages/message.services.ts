@@ -9,9 +9,13 @@ export class MessageService {
   private messageService: Message[] = [];
   private baseUrl: string = 'http://localhost:3000/';
   private http = inject(HttpClient);
+  private headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
+  }
 
   addMessage(message: Message) {
-    return this.http.post(this.baseUrl + 'messages/save', message).pipe(
+    return this.http.post(this.baseUrl + 'messages/save', message, {headers: this.headers}).pipe(
       map((response: any) => {
         const message = response.data;
         this.messageService.push(new Message(
@@ -28,7 +32,7 @@ export class MessageService {
   }
 
   getMessages(): Observable<any> {
-    return this.http.get(this.baseUrl + 'messages').pipe(
+    return this.http.get(this.baseUrl + 'messages', {headers: this.headers}).pipe(
       map((response: any) => {
         const messages = response.data;
         let transformedMessages: Message[] = [];
