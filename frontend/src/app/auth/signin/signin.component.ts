@@ -1,12 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthServices} from "../auth.services";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
@@ -52,7 +53,7 @@ export class SigninComponent implements OnInit {
     this.authService.login(email, password).subscribe({
       next: (response: any) => {
         if (response) {
-          this.router.navigate(['/mensagens']);
+          this.router.navigate(['/']);
         } else {
           console.log('error ao logar');
         }

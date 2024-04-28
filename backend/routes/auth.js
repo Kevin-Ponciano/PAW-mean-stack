@@ -10,11 +10,11 @@ router.post('/register', async (req, res) => {
     const user = new User(req.body);
     try {
         await user.save();
-        const token = jwt.sign({_id: user._id.toString()}, 'rosaleneomelhor');
-        res.status(201).send({user, token});
+        const token = jwt.sign({user}, 'rosaleneomelhor');
+        res.send({token});
     } catch (error) {
         console.log(error)
-        res.status(400).send(error);
+        res.status(500).send(error);
     }
 });
 
@@ -25,8 +25,8 @@ router.post('/login', async (req, res) => {
         if (!user || req.body.password !== user.password) {
             throw new Error('Unable to login');
         }
-        const token = jwt.sign({_id: user._id.toString()}, 'rosaleneomelhor');
-        res.send({user, token});
+        const token = jwt.sign({user}, 'rosaleneomelhor');
+        res.send({token});
     } catch (error) {
         res.status(400).send(error);
     }

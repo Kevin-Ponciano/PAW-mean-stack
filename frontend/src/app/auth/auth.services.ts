@@ -55,15 +55,15 @@ export class AuthServices {
     return localStorage.getItem('token');
   }
 
-  getUser(): any {
+  user(): any {
     const token = this.getToken();
     if (!token) {
-      return null;
+      throw new Error('No token found');
     }
 
     const payload = token.split('.')[1];
     const decoded = window.atob(payload);
-    return JSON.parse(decoded);
+    return JSON.parse(decoded).user;
   }
 
   private setToken(token: string): void {

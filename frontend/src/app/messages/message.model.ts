@@ -1,10 +1,10 @@
 export class Message {
   messageId?: string;
   content: string;
-  userId?: number;
+  userId?: string;
   username: string;
 
-  constructor(content: string, username: string, messageId?: string, userId?: number) {
+  constructor(content: string, username: string, userId?: string, messageId?: string) {
     this.messageId = messageId;
     this.content = content;
     this.userId = userId;

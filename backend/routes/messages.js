@@ -5,7 +5,7 @@ const Message = require('../model/message');
 
 router.get('/', async (req, res, next) => {
     try {
-        const messages = await Message.find();
+        const messages = await Message.find().populate('user', 'name _id');
         res.status(200).json({
             message: 'Messages fetched successfully!',
             data: messages
@@ -20,14 +20,16 @@ router.get('/', async (req, res, next) => {
 
 router.post('/save', async (req, res, next) => {
     const message = new Message({
-        content: req.body.content
+        content: req.body.content,
+        user: req.body.userId
     });
 
     try {
         const messageSaved = await message.save();
+        const messageResponse = await Message.findById(messageSaved._id).populate('user', 'name _id');
         res.status(201).json({
             message: 'Message saved successfully!',
-            data: messageSaved
+            data: messageResponse
         });
     } catch (err) {
         res.status(500).json({

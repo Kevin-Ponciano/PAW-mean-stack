@@ -12,13 +12,14 @@ import {MessageService} from './message.services';
     MessageComponent
   ],
   template: `
-    <div class="col-md-8 col-md-offset-2">
-      @for (msg of messages; track $index) {
-        <app-message [messageVarClass]="msg" (outputMessage)="msg.content = $event"></app-message>
-      } @empty {
-        <h3>No Messages Available</h3>
-      }
-    </div>
+    <!--    <div class="col-md-8 col-md-offset-2">-->
+    <!--      @for (msg of messages; track $index) {-->
+    <!--        <app-message [messageVarClass]="msg" (outputMessage)="msg.content = $event"></app-message>-->
+    <!--      } @empty {-->
+    <!--        <h3>No Messages Available</h3>-->
+    <!--      }-->
+    <!--    </div>-->
+
   `,
 })
 
