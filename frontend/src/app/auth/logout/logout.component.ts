@@ -7,7 +7,6 @@ import {Router} from "@angular/router";
   standalone: true,
   imports: [],
   templateUrl: './logout.component.html',
-  styleUrl: './logout.component.css'
 })
 export class LogoutComponent {
   private authService = inject(AuthServices);

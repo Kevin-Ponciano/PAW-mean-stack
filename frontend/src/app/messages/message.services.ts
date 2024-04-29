@@ -17,18 +17,45 @@ export class MessageService {
   addMessage(message: Message) {
     return this.http.post(this.baseUrl + 'messages/save', message, {headers: this.headers}).pipe(
       map((response: any) => {
-        const message = response.data;
-        const user = new User(message.user.name, message.user.email, undefined, undefined, message.user._id);
-        this.messageService.push(new Message(message.content, user, message._id));
-
+        const newMessage = response.data;
+        const user = new User(newMessage.user.name, newMessage.user.email, undefined, undefined, newMessage.user._id);
+        this.messageService.push(new Message(newMessage.content, user, newMessage._id, newMessage.createdAt));
         return response.message;
       }),
       catchError((error: any) => this.errorHandler(error, 'addMessage()'))
     );
   }
 
-  deleteMessage(message: Message) {
-    this.messageService.splice(this.messageService.indexOf(message), 1);
+  editMessage(content: string, _id: string) {
+    return this.http.put(this.baseUrl + 'messages/edit/' + _id, {content: content}, {headers: this.headers}).pipe(
+      map((response: any) => {
+        const content = response.data.content;
+        const updatedAt = response.data.updatedAt;
+        const _id = response.data._id;
+        const message = this.messageService.find((message) => message._id === _id);
+        if (message) {
+          message.content = content;
+          message.updatedAt = updatedAt;
+        }
+        return response.message;
+      }),
+      catchError((error: any) => this.errorHandler(error, 'editMessage()'))
+    )
+  }
+
+
+  deleteMessage(_id: string) {
+    return this.http.delete(this.baseUrl + 'messages/delete/' + _id, {headers: this.headers}).pipe(
+      map((response: any) => {
+        const _id = response.data._id;
+        const message = this.messageService.find((message) => message._id === _id);
+        if (message) {
+          this.messageService.splice(this.messageService.indexOf(message), 1);
+        }
+        return response.message;
+      }),
+      catchError((error: any) => this.errorHandler(error, 'deleteMessage()'))
+    )
   }
 
   getMessages(): Observable<any> {
@@ -38,7 +65,7 @@ export class MessageService {
         let transformedMessages: Message[] = [];
         for (let message of messages) {
           const user = new User(message.user.name, message.user.email, undefined, undefined, message.user._id);
-          transformedMessages.push(new Message(message.content, user, message._id));
+          transformedMessages.push(new Message(message.content, user, message._id, message.createdAt, message.updatedAt));
         }
         this.messageService = transformedMessages;
         return transformedMessages;

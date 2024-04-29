@@ -22,6 +22,4 @@ import {HeaderComponent} from "../header/header.component";
   `,
 })
 
-export class MessagesComponent {
-
-}
+export class MessagesComponent {}

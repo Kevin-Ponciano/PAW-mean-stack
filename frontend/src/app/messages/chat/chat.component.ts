@@ -1,9 +1,8 @@
 import {FormsModule} from "@angular/forms";
 import {Component, inject, OnInit} from '@angular/core';
-import {MessageComponent} from '../message.component';
 import {Message} from '../message.model';
 import {MessageService} from '../message.services';
-import {NgClass} from "@angular/common";
+import {DatePipe, NgClass} from "@angular/common";
 import {AuthServices} from "../../auth/auth.services";
 import $ from "jquery";
 
@@ -12,11 +11,10 @@ import $ from "jquery";
   standalone: true,
   imports: [
     FormsModule,
-    MessageComponent,
-    NgClass
+    NgClass,
+    DatePipe
   ],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css'
 })
 export class ChatComponent implements OnInit {
   messages: Message[] = [];
@@ -38,10 +36,26 @@ export class ChatComponent implements OnInit {
             }
           }
         );
-    }, 1000);
+    }, 1000,1);
 
     $('#chat').on('DOMNodeInserted', function () {
       $(this).animate({scrollTop: 100000000});
+    })
+  }
+
+  onEdit(id: any) {
+    const message = this.messages.find((message) => message._id === id)
+    $(document).trigger('edit', message)
+  }
+
+  onDelete(id: any) {
+    this.messageService.deleteMessage(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
     })
   }
 }

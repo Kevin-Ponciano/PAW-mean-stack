@@ -5,5 +5,8 @@ export class Message {
     public content: string,
     public user: User,
     public _id?: string,
-  ) {}
+    public createdAt?: Date,
+    public updatedAt?: Date
+  ) {
+  }
 }

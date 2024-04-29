@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 
 @Component({
@@ -10,7 +10,6 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
     RouterOutlet
   ],
   templateUrl: './authentication.component.html',
-  styleUrl: './authentication.component.css'
 })
 export class AuthenticationComponent {
 
