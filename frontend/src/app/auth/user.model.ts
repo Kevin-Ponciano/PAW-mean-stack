@@ -5,6 +5,9 @@ export class User{
     public name: string,
     public email: string,
     public password?: string,
+    public termos?: boolean,
+    public sexo?: string,
+    public dataNascimento?: Date,
     public messages?: Message[],
     public _id?: string
   ) {}

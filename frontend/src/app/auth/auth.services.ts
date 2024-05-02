@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from "rxjs";
+import {User} from "./user.model";
 
 @Injectable()
 
@@ -26,10 +27,9 @@ export class AuthServices {
       );
   }
 
-  register(name: string, email: string, password: string): Observable<any> {
-    const credentials = {name, email, password};
+  register(user: User): Observable<any> {
 
-    return this.http.post<any>(`${this.baseUrl}/register`, credentials)
+    return this.http.post<any>(`${this.baseUrl}/register`, user)
       .pipe(
         map(response => {
           if (response.token) {

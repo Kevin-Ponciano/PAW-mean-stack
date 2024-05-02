@@ -7,7 +7,16 @@ const router = new express.Router();
 
 // Cadastro de usuário
 router.post('/register', async (req, res) => {
-    const user = new User(req.body);
+    const user = new User(
+        {
+            name: req.body.name,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, 8),
+            termos: req.body.termos,
+            sexo: req.body.sexo,
+            dataNascimento: req.body.dataNascimento
+        }
+    );
     try {
         await user.save();
         const token = jwt.sign({user}, 'rosaleneomelhor');
@@ -22,7 +31,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email});
-        if (!user || req.body.password !== user.password) {
+        if (!bcrypt.compareSync(req.body.password, user.password)) {
             throw new Error('Unable to login');
         }
         const token = jwt.sign({user}, 'rosaleneomelhor');

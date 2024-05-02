@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AuthServices} from '../auth.services';
 import {Router, RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
+import {User} from "../user.model";
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,12 @@ export class SignupComponent implements OnInit {
     const name = this.myForm.value.name;
     const email = this.myForm.value.email;
     const password = this.myForm.value.password;
-    this.authService.register(name, email, password).subscribe({
+    const termos = this.myForm.value.termos;
+    const sexo = this.myForm.value.sexo;
+    const dataNascimento = this.myForm.value.dataNascimento;
+
+    const user = new User(name, email, password, termos, sexo, dataNascimento)
+    this.authService.register(user).subscribe({
       next: (response: any) => {
         if (response) {
           this.router.navigate(['/']);
@@ -44,7 +50,10 @@ export class SignupComponent implements OnInit {
         Validators.required,
         Validators.pattern("[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+")
       ]),
-      password: new FormControl(null, Validators.required)
+      password: new FormControl(null, Validators.required),
+      termos: new FormControl(null, Validators.requiredTrue),
+      sexo: new FormControl('Masculino'),
+      dataNascimento: new FormControl(null),
     });
   }
 }
