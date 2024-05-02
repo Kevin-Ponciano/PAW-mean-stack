@@ -32,3 +32,4 @@ e2e/*.map
 
 !/frontend/node_modules/
 ./backend/node_modules/
+/backend/node_modules/
