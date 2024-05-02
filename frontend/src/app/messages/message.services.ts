@@ -18,7 +18,8 @@ export class MessageService {
     return this.http.post(this.baseUrl + 'messages/save', message, {headers: this.headers}).pipe(
       map((response: any) => {
         const newMessage = response.data;
-        const user = new User(newMessage.user.name, newMessage.user.email, undefined, undefined, newMessage.user._id);
+        const user = new User(newMessage.user.name, newMessage.user.email, undefined, undefined,
+          undefined, undefined, undefined, newMessage.user._id);
         this.messageService.push(new Message(newMessage.content, user, newMessage._id, newMessage.createdAt));
         return response.message;
       }),
@@ -64,7 +65,9 @@ export class MessageService {
         const messages = response.data;
         let transformedMessages: Message[] = [];
         for (let message of messages) {
-          const user = new User(message.user.name, message.user.email, undefined, undefined, message.user._id);
+          const user = new User(message.user.name, message.user.email,
+            undefined, undefined, undefined, undefined,
+            undefined, message.user._id);
           transformedMessages.push(new Message(message.content, user, message._id, message.createdAt, message.updatedAt));
         }
         this.messageService = transformedMessages;

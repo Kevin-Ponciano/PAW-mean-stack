@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-md d-print-none">
+<header class="bg-white d-print-none nav-bordered navbar navbar-expand-md">
   <div class="container-xl">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
             aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="nav-item dropdown">
-        <a class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+        <a class="nav-link d-flex lh-1 text-reset p-0 cursor-pointer" data-bs-toggle="dropdown" aria-label="Open user menu">
           <span class="avatar avatar-sm"
                 style="background-image: url('https://ui-avatars.com/api/?name={{user.name[0]}}&color=7F9CF5&background=EBF4FF')"></span>
           <div class="d-none d-xl-block ps-2">
@@ -33,7 +33,6 @@
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-          <a href="./settings.html" class="dropdown-item">Settings</a>
          <app-logout/>
         </div>
       </div>

@@ -26,7 +26,9 @@ export class InputComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    const user = new User(this.user.name, this.user.email, undefined, undefined, this.user._id)
+    const user = new User(this.user.name, this.user.email,
+      undefined, undefined, undefined, undefined, undefined,
+      this.user._id)
     const messageAux = new Message(form.value.content, user, form.value._id ?? undefined);
 
     if (form.value._id) {
