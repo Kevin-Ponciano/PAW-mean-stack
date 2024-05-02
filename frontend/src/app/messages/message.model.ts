@@ -1,13 +1,12 @@
-export class Message {
-  messageId?: string;
-  content: string;
-  userId?: number;
-  username: string;
+import {User} from "../auth/user.model";
 
-  constructor(content: string, username: string, messageId?: string, userId?: number) {
-    this.messageId = messageId;
-    this.content = content;
-    this.userId = userId;
-    this.username = username;
+export class Message {
+  constructor(
+    public content: string,
+    public user: User,
+    public _id?: string,
+    public createdAt?: Date,
+    public updatedAt?: Date
+  ) {
   }
 }

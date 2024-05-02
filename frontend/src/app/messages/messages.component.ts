@@ -1,18 +1,23 @@
 import {Component} from "@angular/core";
-import {MessageListComponent} from "./message-list.component";
-import {MessageInputComponent} from "./message-input.component";
+import {ChatComponent} from "./chat/chat.component";
+import {InputComponent} from "./input/input.component";
+import {HeaderComponent} from "../header/header.component";
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [MessageListComponent, MessageInputComponent],
+  imports: [ChatComponent, InputComponent, HeaderComponent],
   template: `
-    <div class="row">
-      <app-message-input></app-message-input>
-    </div>
-    <hr>
-    <div class="row">
-      <app-message-list></app-message-list>
+    <app-header/>
+    <div class="container">
+      <div class="card m-4">
+        <div class="card-body scrollable" id="chat" style="height: 30rem">
+          <app-message-chat/>
+        </div>
+        <div class="card-footer">
+          <app-message-input/>
+        </div>
+      </div>
     </div>
   `,
 })

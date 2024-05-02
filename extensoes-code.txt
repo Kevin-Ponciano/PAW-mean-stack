@@ -1,3 +1,0 @@
-- johnpapa.angular-essentials
-- PKief.material-icon-theme
-- mongodb.mongodb-vscode
